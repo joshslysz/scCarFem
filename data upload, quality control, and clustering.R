@@ -162,53 +162,6 @@ Carotid_Femoral_srt.int.har <- FindClusters(Carotid_Femoral_srt.int.har, resolut
 
 DimPlot(Carotid_Femoral_srt.int.har, reduction = "umap", split.by = "orig.ident", label = TRUE)
 
-
-
-#####INTEGRATE WITH SEURAT#####################
-# Split the seurat object and integrate with CCA
-Carotid_Femoral_srtList <- SplitObject(Carotid_Femoral_srt, split.by = "orig.ident")
-
-# Normalize and identify variable features for each dataset independently
-Carotid_Femoral_srtList <- lapply(X = Carotid_Femoral_srtList, SCTransform) 
-features <- SelectIntegrationFeatures(object.list = Carotid_Femoral_srtList, 
-                                      nfeatures = 3000)
-Carotid_Femoral_srtList <- PrepSCTIntegration(object.list = Carotid_Femoral_srtList, 
-                                              anchor.features = features)
-Carotid_Femoral_srt.anchors <- FindIntegrationAnchors(object.list = Carotid_Femoral_srtList,
-                                                      normalization.method = "SCT",
-                                                      anchor.features = features)
-Carotid_Femoral_srt.int <- IntegrateData(anchorset = Carotid_Femoral_srt.anchors, 
-                                         normalization.method = "SCT")
-# Re-run the pipeline on the integrated data
-
-# Scale the data
-Carotid_Femoral_srt.int <- ScaleData(Carotid_Femoral_srt.int)
-# Run PCA
-Carotid_Femoral_srt.int <- RunPCA(Carotid_Femoral_srt.int)
-# Choose the number of principle components to keep
-ElbowPlot(Carotid_Femoral_srt.int,ndims = 50)
-# Find nearest neighbors and construct the graph
-Carotid_Femoral_srt.int <- FindNeighbors(Carotid_Femoral_srt.int, k.param = 50, dims = 1:40)
-# Find the clusters
-Carotid_Femoral_srt.int <- FindClusters(Carotid_Femoral_srt.int, resolution = 0.5)
-# Get the UMAP embedding
-Carotid_Femoral_srt.int <- RunUMAP(Carotid_Femoral_srt.int, dims = 1:40)
-Carotid_Femoral_srt.int <- RunTSNE(Carotid_Femoral_srt.int, dims = 1:40)
-# Plot the UMAP with clustering
-DimPlot(Carotid_Femoral_srt.int, reduction = "umap", split.by = "orig.ident", label = TRUE)
-DimPlot(Carotid_Femoral_srt.int, reduction = "tsne", split.by = "orig.ident", label = TRUE) + NoLegend()
-# Dim Plots
-DimPlot(Carotid_Femoral_srt.int, reduction = "umap", group.by = "orig.ident") + DimPlot(Carotid_Femoral_srt, reduction = "umap", group.by = "orig.ident")
-DimPlot(Carotid_Femoral_srt.int, group.by = "orig.ident") + DimPlot(Carotid_Femoral_srt.int, group.by = "seurat_clusters", label = TRUE)
-
-
-DimPlot(Carotid_Femoral_srt.int, split.by = "orig.ident", group.by = "seurat_clusters", label = TRUE) + NoLegend()
-DimPlot(Carotid_Femoral_srt.int, cells = unlist(CellsByIdentities(Carotid_Femoral_srt.int, idents = c(2,5,6,7,9,12,15))), label = TRUE) + NoLegend()
-
-FeaturePlot(Carotid_Femoral_srt.int, features = "nCount_RNA")
-FeaturePlot(Carotid_Femoral_srt.int, features = "nFeature_RNA")
-
-
 # Compare Batch and Cluster ID
 compTable <- table(Carotid_Femoral_srt.int$orig.ident, Carotid_Femoral_srt.int$seurat_clusters)
 compTable <- (compTable / rowSums(compTable)) * 100
