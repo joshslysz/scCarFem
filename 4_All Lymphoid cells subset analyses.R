@@ -54,6 +54,12 @@ Alllymphoid.Carotid_Femoral_srt.int <- FindClusters(Alllymphoid.Carotid_Femoral_
 DimPlot(Alllymphoid.Carotid_Femoral_srt.int, split.by = "orig.ident", reduction = "umap", label = TRUE)
 DimPlot(Alllymphoid.Carotid_Femoral_srt.int, reduction = "umap", label = TRUE)
 
+#################### Cluster proportions and log odds ratio between carotid and Femoral ########################
+#Absolute and Proportion Tables
+alllymphoid.compTable.abs <- table(Alllymphoid.Carotid_Femoral_srt.int$orig.ident, Alllymphoid.Carotid_Femoral_srt.int$seurat_clusters)
+alllymphoid.compTable.rel <- (alllymphoid.compTable.abs / rowSums(alllymphoid.compTable.abs)) * 100
+
+
 ###################################################################
 ################ Cell Typing########################
 ##################################################################
@@ -79,19 +85,73 @@ VlnPlot(Alllymphoid.Carotid_Femoral_srt.int, split.by = "orig.ident", features =
 FeaturePlot(Alllymphoid.Carotid_Femoral_srt.int, features = "CD8A")
 VlnPlot(Alllymphoid.Carotid_Femoral_srt.int, split.by = "orig.ident", features = "CD8A")
 
+#######################################################################
 ################# CD4+ T cells ######################################
 FeaturePlot(Alllymphoid.Carotid_Femoral_srt.int, features = "CD4")
 VlnPlot(Alllymphoid.Carotid_Femoral_srt.int, split.by = "orig.ident", features = "CD4")
+FeaturePlot(Alllymphoid.Carotid_Femoral_srt.int, features = "CD28")
+VlnPlot(Alllymphoid.Carotid_Femoral_srt.int, split.by = "orig.ident", features = "CD28")
 
-###Find plasmacytoid DCs ###
+
+### CD4+ T reg CElls ### CLUSTER 10
+FeaturePlot(Alllymphoid.Carotid_Femoral_srt.int, features = "IL2RA")
+VlnPlot(Alllymphoid.Carotid_Femoral_srt.int, split.by = "orig.ident", features = "IL2RA")
+FeaturePlot(Alllymphoid.Carotid_Femoral_srt.int, features = "Fox3P")
+VlnPlot(Alllymphoid.Carotid_Femoral_srt.int, split.by = "orig.ident", features = "FOX3P")
+
+### CD4+ Th1 Cells ### DOES NOT SEEM TO PRESENT IN DATASET
+FeaturePlot(Alllymphoid.Carotid_Femoral_srt.int, features = "TBX21")
+VlnPlot(Alllymphoid.Carotid_Femoral_srt.int, split.by = "orig.ident", features = "TBX21")
+FeaturePlot(Alllymphoid.Carotid_Femoral_srt.int, features = "CXCR3")
+VlnPlot(Alllymphoid.Carotid_Femoral_srt.int, split.by = "orig.ident", features = "CXCR3")
+FeaturePlot(Alllymphoid.Carotid_Femoral_srt.int, features = "CCR5")
+VlnPlot(Alllymphoid.Carotid_Femoral_srt.int, split.by = "orig.ident", features = "CCR5")
+FeaturePlot(Alllymphoid.Carotid_Femoral_srt.int, features = "IFNG")
+VlnPlot(Alllymphoid.Carotid_Femoral_srt.int, split.by = "orig.ident", features = "IFNG")
+
+
+### CD4+ Th2 Cells ###DOES NOT SEE TO BE PRESENT IN DATASET
+FeaturePlot(Alllymphoid.Carotid_Femoral_srt.int, features = "IL4")
+VlnPlot(Alllymphoid.Carotid_Femoral_srt.int, split.by = "orig.ident", features = "IL4")
+FeaturePlot(Alllymphoid.Carotid_Femoral_srt.int, features = "GATA3")
+VlnPlot(Alllymphoid.Carotid_Femoral_srt.int, split.by = "orig.ident", features = "GATA3") # only really expressed in carotid
+FeaturePlot(Alllymphoid.Carotid_Femoral_srt.int, features = "IL5")
+VlnPlot(Alllymphoid.Carotid_Femoral_srt.int, split.by = "orig.ident", features = "IL5")
+FeaturePlot(Alllymphoid.Carotid_Femoral_srt.int, features = "IL13")
+VlnPlot(Alllymphoid.Carotid_Femoral_srt.int, split.by = "orig.ident", features = "IL13")
+FeaturePlot(Alllymphoid.Carotid_Femoral_srt.int, features = "IL10")
+VlnPlot(Alllymphoid.Carotid_Femoral_srt.int, split.by = "orig.ident", features = "IL10")
+
+### CD4+ Th9 Cells ###DOES NOT SEE TO BE PRESENT IN DATASET
+FeaturePlot(Alllymphoid.Carotid_Femoral_srt.int, features = "IL9")
+VlnPlot(Alllymphoid.Carotid_Femoral_srt.int, split.by = "orig.ident", features = "IL9")
+
+### CD4+ Th17 Cells ###DOES NOT SEE TO BE PRESENT IN DATASET
+FeaturePlot(Alllymphoid.Carotid_Femoral_srt.int, features = "RORC")
+VlnPlot(Alllymphoid.Carotid_Femoral_srt.int, split.by = "orig.ident", features = "RORC")
+
+
+### CD4+ Th22 Cells 
+FeaturePlot(Alllymphoid.Carotid_Femoral_srt.int, features = "IL22")
+VlnPlot(Alllymphoid.Carotid_Femoral_srt.int, split.by = "orig.ident", features = "IL22")
+FeaturePlot(Alllymphoid.Carotid_Femoral_srt.int, features = "AHR")
+VlnPlot(Alllymphoid.Carotid_Femoral_srt.int, split.by = "orig.ident", features = "AHR")
+
+### CD4+ ThFH Cells 
+FeaturePlot(Alllymphoid.Carotid_Femoral_srt.int, features = "BCL6")
+VlnPlot(Alllymphoid.Carotid_Femoral_srt.int, split.by = "orig.ident", features = "BCL6")
+
+
+
+###Find plasmacytoid DCs ### CLUSTER 10
 FeaturePlot(Alllymphoid.Carotid_Femoral_srt.int, features = "CLEC4C")
 VlnPlot(Alllymphoid.Carotid_Femoral_srt.int, features = "CLEC4C")
 
-###Find Plasma Cells ###
+###Find Plasma Cells ### 
 FeaturePlot(Alllymphoid.Carotid_Femoral_srt.int, features = "CD27")
 VlnPlot(Alllymphoid.Carotid_Femoral_srt.int, features = "CD27")
 
-###Proliferating T Cells ###
+###Proliferating T Cells ### CLUSTER 15 & CLuster 8
 Alllymphoid.Carotid_Femoral_srt.int <- CellCycleScoring(Alllymphoid.Carotid_Femoral_srt.int, search = TRUE,
                                                        s.features = cc.genes.updated.2019$s.genes,
                                                        g2m.features = cc.genes.updated.2019$g2m.genes)
@@ -99,13 +159,13 @@ DimPlot(Alllymphoid.Carotid_Femoral_srt.int, group.by = "Phase", split.by = "ori
 
 ###Natural Killer  Cells ###
 
+### T reg CElls ### CLUSTER 10
+FeaturePlot(Alllymphoid.Carotid_Femoral_srt.int, features = "IL2RA")
+VlnPlot(Alllymphoid.Carotid_Femoral_srt.int, split.by = "orig.ident", features = "IL2RA")
+FeaturePlot(Alllymphoid.Carotid_Femoral_srt.int, features = "Fox3P")
+VlnPlot(Alllymphoid.Carotid_Femoral_srt.int, split.by = "orig.ident", features = "FOX3P")
 
 
-
-
-
-alllymphoid.compTable.abs <- table(Alllymphoid.Carotid_Femoral_srt.int$orig.ident, Alllymphoid.Carotid_Femoral_srt.int$seurat_clusters)
-alllymphoid.compTable <- (allmyeloid.compTable / rowSums(allmyeloid.compTable)) * 100
 
 
 
