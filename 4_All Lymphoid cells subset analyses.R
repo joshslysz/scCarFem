@@ -54,20 +54,34 @@ Alllymphoid.Carotid_Femoral_srt.int <- FindClusters(Alllymphoid.Carotid_Femoral_
 DimPlot(Alllymphoid.Carotid_Femoral_srt.int, split.by = "orig.ident", reduction = "umap", label = TRUE)
 DimPlot(Alllymphoid.Carotid_Femoral_srt.int, reduction = "umap", label = TRUE)
 
+###################################################################
+################ Cell Typing########################
+##################################################################
 
-############################ Cell Typing############################################
-#################General lymphoid Markers######################################
+#################Find Markers #####################################
+#Find Markers
+alllymphoid.All.markers <- FindAllMarkers(Alllymphoid.Carotid_Femoral_srt.int, 
+                                         only.pos = TRUE)
+write_csv(alllymphoid.All.markers, file = "alllymphoid.All.markers.csv")
+
+
+alllymphoid.All.sig_markers <- alllymphoid.All.markers %>% 
+  filter(p_val_adj < .05)
+
+write_csv(alllymphoid.All.sig_markers, file = "alllymphoid.All.sig_markers.csv")
+
+
+################# T cells ######################################
 FeaturePlot(Alllymphoid.Carotid_Femoral_srt.int, features = "CD3D")
 VlnPlot(Alllymphoid.Carotid_Femoral_srt.int, split.by = "orig.ident", features = "CD3D")
+
+################# CD8+ T cells ######################################
 FeaturePlot(Alllymphoid.Carotid_Femoral_srt.int, features = "CD8A")
 VlnPlot(Alllymphoid.Carotid_Femoral_srt.int, split.by = "orig.ident", features = "CD8A")
+
+################# CD4+ T cells ######################################
 FeaturePlot(Alllymphoid.Carotid_Femoral_srt.int, features = "CD4")
 VlnPlot(Alllymphoid.Carotid_Femoral_srt.int, split.by = "orig.ident", features = "CD4")
-
-###
-###Find T Cells ###
-FeaturePlot(Alllymphoid.Carotid_Femoral_srt.int, features = "CD3D")
-VlnPlot(Alllymphoid.Carotid_Femoral_srt.int, features = "CD3D")
 
 ###Find plasmacytoid DCs ###
 FeaturePlot(Alllymphoid.Carotid_Femoral_srt.int, features = "CLEC4C")
@@ -76,6 +90,17 @@ VlnPlot(Alllymphoid.Carotid_Femoral_srt.int, features = "CLEC4C")
 ###Find Plasma Cells ###
 FeaturePlot(Alllymphoid.Carotid_Femoral_srt.int, features = "CD27")
 VlnPlot(Alllymphoid.Carotid_Femoral_srt.int, features = "CD27")
+
+###Proliferating T Cells ###
+Alllymphoid.Carotid_Femoral_srt.int <- CellCycleScoring(Alllymphoid.Carotid_Femoral_srt.int, search = TRUE,
+                                                       s.features = cc.genes.updated.2019$s.genes,
+                                                       g2m.features = cc.genes.updated.2019$g2m.genes)
+DimPlot(Alllymphoid.Carotid_Femoral_srt.int, group.by = "Phase", split.by = "orig.ident")
+
+###Natural Killer  Cells ###
+
+
+
 
 
 
