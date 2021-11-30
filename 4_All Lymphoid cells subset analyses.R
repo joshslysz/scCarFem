@@ -108,25 +108,35 @@ VlnPlot(Alllymphoid.Carotid_Femoral_srt.int, split.by = "orig.ident", features =
 FeaturePlot(Alllymphoid.Carotid_Femoral_srt.int, features = "TNF")
 VlnPlot(Alllymphoid.Carotid_Femoral_srt.int, split.by = "orig.ident", features = "TNF")
 
-
-
 #######################################################################
 ################# CD4+ T cells ######################################
+#Saigusa, Ryosuke, Holger Winkels, and Klaus Ley. "T cell subsets and functions in atherosclerosis." Nature reviews cardiology 17.7 (2020): 387-401.
 FeaturePlot(Alllymphoid.Carotid_Femoral_srt.int, features = "CD4")
 VlnPlot(Alllymphoid.Carotid_Femoral_srt.int, split.by = "orig.ident", features = "CD4")
 FeaturePlot(Alllymphoid.Carotid_Femoral_srt.int, features = "CD28")
 VlnPlot(Alllymphoid.Carotid_Femoral_srt.int, split.by = "orig.ident", features = "CD28")
 FeaturePlot(Alllymphoid.Carotid_Femoral_srt.int, features = "CCR7")
 VlnPlot(Alllymphoid.Carotid_Femoral_srt.int, split.by = "orig.ident", features = "CCR7") # central memory T cells
+FeaturePlot(Alllymphoid.Carotid_Femoral_srt.int, features = "CD40LG")
+VlnPlot(Alllymphoid.Carotid_Femoral_srt.int, split.by = "orig.ident", features = "CD40LG") #found only in cluster 1
+FeaturePlot(Alllymphoid.Carotid_Femoral_srt.int, features = "CD44")
+VlnPlot(Alllymphoid.Carotid_Femoral_srt.int, split.by = "orig.ident", features = "CD44") #not naive
 
 
-### CD4+ T reg CElls ### CLUSTER 9#### TEST TEST TEST
+### CD4+ T FH cells ###################### # Cluster 14
+FeaturePlot(Alllymphoid.Carotid_Femoral_srt.int, features = "IL21")
+VlnPlot(Alllymphoid.Carotid_Femoral_srt.int, split.by = "orig.ident", features = "IL21")
+FeaturePlot(Alllymphoid.Carotid_Femoral_srt.int, features = "BCL6")
+VlnPlot(Alllymphoid.Carotid_Femoral_srt.int, split.by = "orig.ident", features = "BCL6")
+
+### CD4+ T reg CElls ### CLUSTER 9 
 FeaturePlot(Alllymphoid.Carotid_Femoral_srt.int, features = "IL2RA")
 VlnPlot(Alllymphoid.Carotid_Femoral_srt.int, split.by = "orig.ident", features = "IL2RA")
 FeaturePlot(Alllymphoid.Carotid_Femoral_srt.int, features = "Fox3P")
 VlnPlot(Alllymphoid.Carotid_Femoral_srt.int, split.by = "orig.ident", features = "FOX3P")
 FeaturePlot(Alllymphoid.Carotid_Femoral_srt.int, features = "Fox3P")
 VlnPlot(Alllymphoid.Carotid_Femoral_srt.int, split.by = "orig.ident", features = "FOX3P")
+
 ### CD4+ Th1 Cells ### DOES NOT SEEM TO PRESENT IN DATASET
 FeaturePlot(Alllymphoid.Carotid_Femoral_srt.int, features = "TBX21")
 VlnPlot(Alllymphoid.Carotid_Femoral_srt.int, split.by = "orig.ident", features = "TBX21")
@@ -136,7 +146,6 @@ FeaturePlot(Alllymphoid.Carotid_Femoral_srt.int, features = "CCR5")
 VlnPlot(Alllymphoid.Carotid_Femoral_srt.int, split.by = "orig.ident", features = "CCR5")
 FeaturePlot(Alllymphoid.Carotid_Femoral_srt.int, features = "IFNG")
 VlnPlot(Alllymphoid.Carotid_Femoral_srt.int, split.by = "orig.ident", features = "IFNG")
-
 
 ### CD4+ Th2 Cells ###DOES NOT SEE TO BE PRESENT IN DATASET
 FeaturePlot(Alllymphoid.Carotid_Femoral_srt.int, features = "IL4")
@@ -165,9 +174,6 @@ VlnPlot(Alllymphoid.Carotid_Femoral_srt.int, split.by = "orig.ident", features =
 FeaturePlot(Alllymphoid.Carotid_Femoral_srt.int, features = "AHR")
 VlnPlot(Alllymphoid.Carotid_Femoral_srt.int, split.by = "orig.ident", features = "AHR")
 
-### CD4+ ThFH Cells 
-FeaturePlot(Alllymphoid.Carotid_Femoral_srt.int, features = "BCL6")
-VlnPlot(Alllymphoid.Carotid_Femoral_srt.int, split.by = "orig.ident", features = "BCL6")
 
 ###Find Gamma sigma T cells  ### POssible cluster 14
 #cholesterol-related pathway genes: Cheng, Hsin-Yuan, et al. "Increased cholesterol content in gammadelta (γδ) T lymphocytes differentially regulates their activation." PloS one 8.5 (2013): e63746.
@@ -180,10 +186,22 @@ VlnPlot(Alllymphoid.Carotid_Femoral_srt.int, features = "TRERF1")
 FeaturePlot(Alllymphoid.Carotid_Femoral_srt.int, features = "IL6")
 VlnPlot(Alllymphoid.Carotid_Femoral_srt.int, features = "IL6")
 
-
-###Find plasmacytoid DCs ### CLUSTER 10
+###################################################################
+################# Dendritic cells ######################################
+###Find plasmacytoid DCs ### CLUSTER 10 & 7
 FeaturePlot(Alllymphoid.Carotid_Femoral_srt.int, features = "CLEC4C")
-VlnPlot(Alllymphoid.Carotid_Femoral_srt.int, features = "CLEC4C")
+VlnPlot(Alllymphoid.Carotid_Femoral_srt.int, split.by = "orig.ident", features = "CLEC4C")
+FeaturePlot(Alllymphoid.Carotid_Femoral_srt.int, features = "IL3RA")
+VlnPlot(Alllymphoid.Carotid_Femoral_srt.int, split.by = "orig.ident", features = "IL3RA")
+FeaturePlot(Alllymphoid.Carotid_Femoral_srt.int, features = "IRF7")
+VlnPlot(Alllymphoid.Carotid_Femoral_srt.int, split.by = "orig.ident", features = "IRF7")
+# Macri, Christophe, et al. "Dendritic cell subsets." Seminars in cell & developmental biology. Vol. 84. Academic Press, 2018.
+
+###IRF8-Dependent DCs
+FeaturePlot(Alllymphoid.Carotid_Femoral_srt.int, features = "IRF8")
+VlnPlot(Alllymphoid.Carotid_Femoral_srt.int, split.by = "orig.ident", features = "IRF8")
+#Clément, Marc, et al. "Deletion of IRF8 (interferon regulatory factor 8)-dependent dendritic cells abrogates proatherogenic adaptive immunity." Circulation research 122.6 (2018): 813-820.
+
 
 ###Find Plasma Cells ### 
 FeaturePlot(Alllymphoid.Carotid_Femoral_srt.int, features = "CD27")
@@ -199,12 +217,11 @@ DimPlot(Alllymphoid.Carotid_Femoral_srt.int, group.by = "Phase", split.by = "ori
 FeaturePlot(Alllymphoid.Carotid_Femoral_srt.int, features = "KLRC1")
 VlnPlot(Alllymphoid.Carotid_Femoral_srt.int, split.by = "orig.ident", features = "KLRC1")
 
-### T reg CElls ### CLUSTER 10
-FeaturePlot(Alllymphoid.Carotid_Femoral_srt.int, features = "IL2RA")
-VlnPlot(Alllymphoid.Carotid_Femoral_srt.int, split.by = "orig.ident", features = "IL2RA")
-FeaturePlot(Alllymphoid.Carotid_Femoral_srt.int, features = "Fox3P")
-VlnPlot(Alllymphoid.Carotid_Femoral_srt.int, split.by = "orig.ident", features = "FOX3P")
 
+
+####Plasma Cells #### Cluster 13
+FeaturePlot(Alllymphoid.Carotid_Femoral_srt.int, features = "JCHAIN")
+VlnPlot(Alllymphoid.Carotid_Femoral_srt.int, split.by = "orig.ident", features = "JCHAIN")
 
 ####CLUSTER 12 ####
 FeaturePlot(Alllymphoid.Carotid_Femoral_srt.int, features = "CCR7")
